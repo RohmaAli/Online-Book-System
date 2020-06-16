@@ -1,47 +1,70 @@
 <!DOCTYPE html>
 @langrtl
-    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 @else
-    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @endlangrtl
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@yield('title', app_name())</title>
-        <meta name="description" content="@yield('meta_description', 'Laravel Boilerplate')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
-        @yield('meta')
 
-        {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
-        @stack('before-styles')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', app_name())</title>
+    <meta name="description" content="@yield('meta_description', 'Laravel Boilerplate')">
+    <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
 
-        <!-- Check if the language is set to RTL, so apply the RTL layouts -->
-        <!-- Otherwise apply the normal LTR layouts -->
-        {{ style(mix('css/frontend.css')) }}
+    @yield('meta')
 
-        @stack('after-styles')
-    </head>
-    <body>
-        @include('includes.partials.read-only')
+    {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
+    @stack('before-styles')
 
-        <div id="app">
-            @include('includes.partials.logged-in-as')
-            @include('frontend.includes.nav')
+    <!-- Check if the language is set to RTL, so apply the RTL layouts -->
+    <!-- Otherwise apply the normal LTR layouts -->
+    {{ style(mix('css/frontend.css')) }}
 
-            <div class="container">
-                @include('includes.partials.messages')
-                @yield('content')
-            </div><!-- container -->
-        </div><!-- #app -->
+    @stack('after-styles')
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Gothic A1', sans-serif;
+        }
 
-        <!-- Scripts -->
-        @stack('before-scripts')
-        {!! script(mix('js/manifest.js')) !!}
-        {!! script(mix('js/vendor.js')) !!}
-        {!! script(mix('js/frontend.js')) !!}
-        @stack('after-scripts')
+        .image:hover {
+            transition: .4s;
+            transform: scale(1.2) !important;
+        }
 
-        @include('includes.partials.ga')
-    </body>
+        img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    @include('includes.partials.read-only')
+
+    <div id="app">
+        @include('includes.partials.logged-in-as')
+        @include('frontend.includes.nav')
+
+        <div class="container">
+            @include('includes.partials.messages')
+            @yield('content')
+        </div><!-- container -->
+    </div><!-- #app -->
+
+    <!-- Scripts -->
+    @stack('before-scripts')
+    {!! script(mix('js/manifest.js')) !!}
+    {!! script(mix('js/vendor.js')) !!}
+    {!! script(mix('js/frontend.js')) !!}
+    @stack('after-scripts')
+
+    @include('includes.partials.ga')
+    <script src="https://kit.fontawesome.com/27b15c4a23.js" crossorigin="anonymous"></script>
+</body>
+
 </html>
